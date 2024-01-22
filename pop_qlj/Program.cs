@@ -5,19 +5,31 @@ namespace PoPRefactoring;
 
 public class PopProject
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
-        int dia;
-        int mes;
-        int any;
-        bool validat;
-        Console.WriteLine("Introdueix el dia, mes i any");
-        validat = valida(dia, mes, any);
-        Console.WriteLine("El format no és correcte");
-        Console.WriteLine("La data és correcta {1}", validat);
+        const string AskDate = "Introdueix el dia, mes i any";
+        const string MsgFormatError = "El format no és correcte";
+        const string MsgCorrectDate = "La data és correcta";
+        int dia, mes,any;
+
+        Console.WriteLine(AskDate);
+        dia = Convert.ToInt32(Console.ReadLine());
+        mes = Convert.ToInt32(Console.ReadLine());
+        any = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine(Valida(dia, mes, any) ? MsgCorrectDate : MsgFormatError);
     }
 
-    public static bool valida(int day, int month, int year)
+    public static bool CheckDay (int day, int totalDaysMonth)
+    {
+        return day > totalDaysMonth;
+    }
+
+    public static int LeapYeaDays (int year)
+    {
+        return ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))) ? 29 : 28;
+    }
+    public static bool Valida(int day, int month, int year)
     {
 
         if (day < 1 || day > 31)
@@ -59,22 +71,10 @@ public class PopProject
 
             case 2: // verifica l'any de traspàs
 
-                if ((year % 400 == 0) ||
-
-                ((year % 4 == 0) && (year % 100 != 0)))
-                    totalDaysMonth = 29;
-
-                else totalDaysMonth = 28;
+                totalDaysMonth = LeapYeaDays (year);
 
                 break;
-
         }
-
-        if (day > totalDaysMonth)
-
-            return false;
-
-        else return true;
-
+        return CheckDay (day, totalDaysMonth);
     }
 }
