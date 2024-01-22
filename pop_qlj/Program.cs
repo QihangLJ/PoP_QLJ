@@ -22,7 +22,7 @@ public class PopProject
 
     public static bool CheckDay (int day, int totalDaysMonth)
     {
-        return day > totalDaysMonth;
+        return day < totalDaysMonth;
     }
 
     public static int LeapYeaDays (int year)
