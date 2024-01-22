@@ -10,7 +10,9 @@ public class PopProject
         const string AskDate = "Introdueix el dia, mes i any";
         const string MsgFormatError = "El format no és correcte";
         const string MsgCorrectDate = "La data és correcta";
+        const string MsgAskForMenu = "Que vols fer? \nA.Saltar \nB.Correr \nC.Ajupir-se \nD.Amagar-se";
         int dia, mes,any;
+        char charInput;
 
         Console.WriteLine(AskDate);
         dia = Convert.ToInt32(Console.ReadLine());
@@ -18,11 +20,15 @@ public class PopProject
         any = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine(Valida(dia, mes, any) ? MsgCorrectDate : MsgFormatError);
+
+        Console.WriteLine(MsgAskForMenu);
+        charInput = Convert.ToChar(Console.ReadLine()!);
+        Menu(charInput);    
     }
 
     public static bool CheckDay (int day, int totalDaysMonth)
     {
-        return day > totalDaysMonth;
+        return day < totalDaysMonth;
     }
 
     public static int LeapYeaDays (int year)
@@ -76,5 +82,33 @@ public class PopProject
                 break;
         }
         return CheckDay (day, totalDaysMonth);
+    }
+
+    public static void Menu(char option)
+    {
+        const string MsgJump = "SALTO";
+        const string MsgRun = "CORRO";
+        const string MsgAjup = "M´AJUPO";
+        const string MsgHide = "M´AMAGO";
+
+        switch (option)
+        {
+            case 'a':
+            case 'A':
+                Console.WriteLine(MsgJump);
+                break;
+            case 'b':
+            case 'B':
+                Console.WriteLine(MsgRun);
+                break;
+            case 'c':
+            case 'C':
+                Console.WriteLine(MsgAjup);
+                break;
+            case 'd':
+            case 'D':
+                Console.WriteLine(MsgHide);
+                break;
+        }
     }
 }
